@@ -23,7 +23,6 @@ public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
 
-    // 👇 lista de rutas públicas para Swagger/OpenAPI y auth
     private static final String[] SWAGGER_WHITELIST = {
             "/v3/api-docs/**",
             "/swagger-ui/**",
@@ -37,11 +36,9 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // 👇 Swagger y login públicos
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
 
-                        // 👇 tu protección por roles (ajústalo a lo que ya tenías)
                         .requestMatchers(HttpMethod.GET, "/api/v1/messages/**").hasAnyRole("DOCTOR","PATIENT","ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/v1/messages/**").hasAnyRole("DOCTOR","PATIENT","ADMIN")
                         .requestMatchers("/api/v1/conversations/**").hasAnyRole("DOCTOR","PATIENT","ADMIN")
