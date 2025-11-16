@@ -23,7 +23,7 @@ public class OpenApiConfiguration {
                                         .scheme("bearer")
                                         .bearerFormat("JWT")))
                 .info(new Info()
-                        .title("Vitalia API")
+                        .title("CareLink API")
                         .description("""
                                 Plataforma open source orientada al cuidado integral 
                                 de adultos mayores y la comunicación con sus familias.
